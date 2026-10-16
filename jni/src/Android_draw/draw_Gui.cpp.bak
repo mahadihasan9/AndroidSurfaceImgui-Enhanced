@@ -1,0 +1,125 @@
+#include "draw.h"
+#include "My_icon/pic_ZhenAiKun_png.h"
+
+char light[] = "Light theme";
+char simple[] = "simple theme";
+
+bool permeate_record = false;
+bool permeate_record_ini = false;
+struct Last_ImRect LastCoordinate = {0, 0, 0, 0};
+
+std::unique_ptr<AndroidImgui> graphics;
+ANativeWindow *window = NULL;
+android::ANativeWindowCreator::DisplayInfo displayInfo;
+ImGuiWindow *g_window = NULL;
+int abs_ScreenX = 0, abs_ScreenY = 0;
+int native_window_screen_x = 0, native_window_screen_y = 0;
+TextureInfo myImg{};
+
+void init_My_drawdata() {
+    ImGui::StyleColorsDark();
+    ImGui::My_Android_LoadSystemFont(25.0f);
+    ImGui::GetStyle().ScaleAllSizes(3.25f);
+    myImg = graphics->LoadTextureFromMemory((void*)picture_ZhenAiKun_PNG_H, sizeof(picture_ZhenAiKun_PNG_H));
+}
+
+void screen_config() {
+    ::displayInfo = android::ANativeWindowCreator::GetDisplayInfo();
+}
+
+void drawBegin() {
+    if (::permeate_record_ini) {
+        if (::g_window != NULL) {
+            LastCoordinate.Pos_x = ::g_window->Pos.x;
+            LastCoordinate.Pos_y = ::g_window->Pos.y;
+            LastCoordinate.Size_x = ::g_window->Size.x;
+            LastCoordinate.Size_y = ::g_window->Size.y;
+        }
+        ::g_window = NULL; 
+        graphics->Shutdown();
+        android::ANativeWindowCreator::Destroy(::window);
+        ::window = android::ANativeWindowCreator::Create("AImGui", native_window_screen_x, native_window_screen_y, permeate_record);
+        graphics->Init_Render(::window, native_window_screen_x, native_window_screen_y);
+        ::init_My_drawdata();
+    }
+    static uint32_t orientation = -1;
+    screen_config();
+    if (orientation != displayInfo.orientation) {
+        orientation = displayInfo.orientation;
+        Touch::setOrientation((int)displayInfo.orientation);
+    }
+}
+
+void Layout_tick_UI(bool *main_thread_flag) {
+    if (::permeate_record_ini) {
+        if(LastCoordinate.Size_x > 0 && LastCoordinate.Size_y > 0){
+            ImGui::SetNextWindowPos(ImVec2(LastCoordinate.Pos_x, LastCoordinate.Pos_y));
+            ImGui::SetNextWindowSize(ImVec2(LastCoordinate.Size_x, LastCoordinate.Size_y));
+        }
+    }
+
+    //ImGui::SetNextWindowSize(ImVec2(300,180), ImGuiCond_FirstUseEver);
+    static int count = 0;
+    static bool show_demo_window = false;
+    static bool second_window = false;
+    static bool ck = false;
+    
+    ImGui::Begin("My First App", main_thread_flag);
+    
+    ImGui::Text("%s : %s", graphics->RenderName, ImGui::GetVersion());
+    
+    if (::permeate_record_ini) {
+        permeate_record_ini = false;
+    }
+
+    ImGui::Text("counter: %d", count);
+    if(ImGui::Button("Click me")){
+        count++;
+    }
+    
+    ::permeate_record_ini = false;
+    
+    /*
+    if (ImGui::Checkbox("Record Bypass", &::permeate_record)) {
+        ::permeate_record_ini = true;
+    }
+    */
+
+    if (ImGui::Button("Theme Change")){
+        ck = !ck;
+        if (ck){
+            ImGui::StyleColorsLight();
+        }else{
+            ImGui::StyleColorsDark();
+        }
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Demo window")) {
+        show_demo_window = !show_demo_window;
+    }
+    if (ImGui::Button("second window")){
+        second_window = !second_window;
+    }
+    if (second_window){
+        ImGui::Begin("second window", &second_window);
+        if(myImg.DS) {
+            ImGui::Image(myImg.DS, ImVec2(240, 240));
+        }
+        if (ImGui::Button("Close")){
+            second_window = false;
+        }
+        ImGui::End();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Exit")){
+        *main_thread_flag = false;
+    }
+
+    g_window = ImGui::GetCurrentWindow();
+
+    if (show_demo_window) {
+        ImGui::ShowDemoWindow(&show_demo_window);
+    }
+    
+    ImGui::End();
+}
