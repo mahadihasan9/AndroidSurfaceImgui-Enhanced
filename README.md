@@ -146,8 +146,5 @@ This project is open-sourced under the MIT License - see the [LICENSE](LICENSE) 
 - Thanks to all contributors and testers
 
 
-See [CHANGELOG.md](CHANGELOG.md) for details.
-
----
 
 **Note**: This project requires system-level permission to run properly. Please make sure to use it in an environment with appropriate permissions.
