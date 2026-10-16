@@ -35,10 +35,13 @@ void drawBegin() {
             LastCoordinate.Size_x = ::g_window->Size.x;
             LastCoordinate.Size_y = ::g_window->Size.y;
         }
-        ::g_window = NULL; 
-        graphics->Shutdown();
+        ::g_window = NULL;
         android::ANativeWindowCreator::Destroy(::window);
+        graphics->Shutdown();
         ::window = android::ANativeWindowCreator::Create("AImGui", native_window_screen_x, native_window_screen_y, permeate_record);
+        if (::window == nullptr) {
+            return;
+        }
         graphics->Init_Render(::window, native_window_screen_x, native_window_screen_y);
         ::init_My_drawdata();
     }

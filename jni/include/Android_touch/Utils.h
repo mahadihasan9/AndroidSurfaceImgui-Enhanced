@@ -242,8 +242,8 @@ inline std::string getJString(JNIEnv *env, jstring jstr) {
 }
 
 inline int getRandomNumber(int minNumber, int maxNumber) {
-    std::random_device rd;  // 随机设备，用于生成种子
-    std::mt19937 gen(rd());  // Mersenne Twister 随机数引擎，可以替换为其他引擎
+    std::random_device rd;  // Random device, used to generate seed
+    std::mt19937 gen(rd());  // Mersenne Twister RNG engine, can be replaced with another engine
     std::uniform_int_distribution<int> distribution(minNumber, maxNumber);
     return distribution(gen);
 }

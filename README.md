@@ -1,158 +1,158 @@
 # AndroidSurfaceImgui C++17 Enhanced
 
-## 项目介绍
+## Project Introduction
 
-本项目基于 [AndroidSurfaceImgui](https://github.com/Bzi-Han/AndroidSurfaceImgui) 进行修改和增强，是一个可以编译成Android可执行文件的项目，通过Android API创建Surface并进行Dear ImGui的绘制。
+This project is modified and enhanced based on [AndroidSurfaceImgui](https://github.com/Bzi-Han/AndroidSurfaceImgui). It can be compiled into an Android executable that creates a Surface via Android APIs and renders Dear ImGui on it.
 
-### 主要改进
+### Main Improvements
 
-- ✅ **C++17兼容性**：完全兼容C++17标准，提供更好的现代C++特性支持
-- ✅ **增强的Surface管理**：新增清理Surface函数，确保资源正确释放
-- ✅ **修复重创建问题**：解决了关闭后不能重新创建根Surface的问题
-- ✅ **防录屏功能**：支持防录屏模式切换，保护敏感内容
-- ✅ **广泛系统支持**：支持Android 5.0 - Android 16.0全版本
-- ✅ **NDK构建系统**：使用ndk-build进行编译，简化构建流程
+- ✅ **C++17 compatibility**: Fully compatible with the C++17 standard with better modern C++ support
+- ✅ **Enhanced Surface management**: New Surface cleanup function to ensure resources are released correctly
+- ✅ **Fixed re-creation issue**: Fixed the problem where the root Surface could not be re-created after being closed
+- ✅ **Screen-capture protection**: Supports toggling screen-capture protection to protect sensitive content
+- ✅ **Wide system support**: Supports all versions from Android 5.0 to Android 16.0
+- ✅ **NDK build system**: Uses ndk-build for compilation, simplifying the build process
 
-## 支持的Android版本
+## Supported Android Versions
 
-| 版本范围 | 支持状态 | 备注 |
+| Version Range | Support Status | Notes |
 |---------|---------|------|
-| Android 5.0 - 5.1 | ✅ 完全支持 | API Level 21-22 |
-| Android 6.0 | ✅ 完全支持 | API Level 23 |
-| Android 7.0 - 7.1 | ✅ 完全支持 | API Level 24-25 |
-| Android 8.0 - 8.1 | ✅ 完全支持 | API Level 26-27 |
-| Android 9.0 | ✅ 完全支持 | API Level 28 |
-| Android 10.0 | ✅ 完全支持 | API Level 29 |
-| Android 11.0 | ✅ 完全支持 | API Level 30 |
-| Android 12.0 - 12.1 | ✅ 完全支持 | API Level 31-32 |
-| Android 13.0 | ✅ 完全支持 | API Level 33 |
-| Android 14.0 | ✅ 完全支持 | API Level 34 |
-| Android 15.0 | ✅ 完全支持 | API Level 35 |
-| Android 16.0 | ✅ 完全支持 | API Level 36 |
+| Android 5.0 - 5.1 | ✅ Fully supported | API Level 21-22 |
+| Android 6.0 | ✅ Fully supported | API Level 23 |
+| Android 7.0 - 7.1 | ✅ Fully supported | API Level 24-25 |
+| Android 8.0 - 8.1 | ✅ Fully supported | API Level 26-27 |
+| Android 9.0 | ✅ Fully supported | API Level 28 |
+| Android 10.0 | ✅ Fully supported | API Level 29 |
+| Android 11.0 | ✅ Fully supported | API Level 30 |
+| Android 12.0 - 12.1 | ✅ Fully supported | API Level 31-32 |
+| Android 13.0 | ✅ Fully supported | API Level 33 |
+| Android 14.0 | ✅ Fully supported | API Level 34 |
+| Android 15.0 | ✅ Fully supported | API Level 35 |
+| Android 16.0 | ✅ Fully supported | API Level 36 |
 
-## 环境要求
+## Requirements
 
-### 开发环境
-- **Android NDK**: r21e 或更高版本
-- **编译器**: 支持C++17的GCC/Clang
-- **最低API Level**: 22 (Android 5.1)
-- **目标架构**: arm64-v8a, armeabi-v7a, x86, x86_64
+### Development Environment
+- **Android NDK**: r21e or higher
+- **Compiler**: GCC/Clang with C++17 support
+- **Minimum API Level**: 22 (Android 5.1)
+- **Target ABIs**: arm64-v8a, armeabi-v7a, x86, x86_64
 
-### 运行环境
-- **Android设备**: Android 5.0及以上
-- **权限要求**: 需要系统级权限或root权限
-- **硬件要求**: 支持OpenGL ES 3.0或Vulkan的设备
+### Runtime Environment
+- **Android device**: Android 5.0 and above
+- **Permission requirements**: System-level permission or root permission required
+- **Hardware requirements**: Device supporting OpenGL ES 3.0 or Vulkan
 
-## 快速开始
+## Quick Start
 
-### 1. 克隆项目
+### 1. Clone the project
 
 ```bash
 git clone https://github.com/AFan4724/AndroidSurfaceImgui-Enhanced.git
 cd AndroidSurfaceImgui-Enhanced
 ```
 
-### 2. 编译项目
+### 2. Build the project
 
-使用ndk-build进行编译：
+Build with ndk-build:
 
 ```bash
-# 设置NDK路径（如果未设置环境变量）
+# Set NDK path (if env variable is not set)
 export NDK_ROOT=/path/to/your/ndk
 
-# 编译所有架构
+# Build all architectures
 ndk-build
 
-# 或编译特定架构
+# Or build a specific ABI
 ndk-build APP_ABI=arm64-v8a
 ```
 
-### 3. 部署到设备
+### 3. Deploy to device
 
 ```bash
-# 推送到设备
+# Push to device
 adb push libs/arm64-v8a/imgui_chain_v2-1.0 /data/local/tmp/
 
-# 设置执行权限
+# Set execute permission
 adb shell chmod 755 /data/local/tmp/imgui_chain_v2-1.0
 
-# 运行程序
+# Run the program
 adb shell su -c "/data/local/tmp/imgui_chain_v2-1.0"
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 AndroidSurfaceImgui-Enhanced/
-├── jni/                          # NDK源码目录
-│   ├── src/                      # 源代码
-│   │   ├── main.cpp             # 程序入口
-│   │   ├── Android_draw/        # 绘制相关
-│   │   ├── Android_Graphics/    # 图形渲染管理
-│   │   ├── Android_my_imgui/    # ImGui Android适配
-│   │   ├── Android_touch/       # 触摸事件处理
-│   │   ├── ImGui/              # Dear ImGui库
-│   │   └── My_Utils/           # 工具函数
-│   ├── include/                 # 头文件
-│   ├── Android.mk              # NDK构建配置
-│   └── Application.mk          # 应用配置
-├── libs/                        # 编译输出目录
-└── README.md                   # 项目文档
+├── jni/                          # NDK source directory
+│   ├── src/                      # Source code
+│   │   ├── main.cpp             # Program entry point
+│   │   ├── Android_draw/        # Rendering related
+│   │   ├── Android_Graphics/    # Graphics/rendering manager
+│   │   ├── Android_my_imgui/    # ImGui Android adapter
+│   │   ├── Android_touch/       # Touch event handling
+│   │   ├── ImGui/              # Dear ImGui library
+│   │   └── My_Utils/           # Utility functions
+│   ├── include/                 # Header files
+│   ├── Android.mk              # NDK build config
+│   └── Application.mk          # App config
+├── libs/                        # Build output directory
+└── README.md                   # Project documentation
 ```
 
-## 核心功能
+## Core Features
 
-### Surface管理
+### Surface management
 
 ```cpp
-// 创建Surface
+// Create Surface
 ::window = android::ANativeWindowCreator::Create("test", width, height, permeate_record);
 
-// 清理Surface（新增功能）
+// Cleanup Surface (new feature)
 android::ANativeWindowCreator::Cleanup();
 
-// 销毁Surface
+// Destroy Surface
 android::ANativeWindowCreator::Destroy(::window);
 ```
 
-### 防录屏功能
+### Screen-capture protection
 
 ```cpp
-// 启用防录屏模式
-bool permeate_record = false;  // false = 防录屏，true = 允许录屏
+// Enable screen-capture protection
+bool permeate_record = false;  // false = block capture, true = allow capture
 
-// 在创建Surface时设置
+// Set it when creating the Surface
 ::window = android::ANativeWindowCreator::Create("test", width, height, permeate_record);
 ```
 
-## 贡献指南
+## Contributing
 
-欢迎提交Issue和Pull Request！
+Issues and Pull Requests are welcome!
 
-1. Fork本项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启Pull Request
+1. Fork this project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 许可证
+## License
 
-本项目基于MIT许可证开源 - 查看 [LICENSE](LICENSE) 文件了解详情。
+This project is open-sourced under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 致谢
+## Acknowledgements
 
-- 感谢 [Bzi-Han/AndroidSurfaceImgui](https://github.com/Bzi-Han/AndroidSurfaceImgui) 提供的原始项目基础
-- 感谢 [Dear ImGui](https://github.com/ocornut/imgui) 团队提供优秀的GUI库
-- 感谢所有贡献者和测试者
+- Thanks to [Bzi-Han/AndroidSurfaceImgui](https://github.com/Bzi-Han/AndroidSurfaceImgui) for the original project base
+- Thanks to the [Dear ImGui](https://github.com/ocornut/imgui) team for the excellent GUI library
+- Thanks to all contributors and testers
 
-## 赞助
+## Sponsor
 
-- 感谢 花椒鸡 赞助
+- Thanks to 花椒鸡 for sponsoring
 
-## 更新日志
+## Changelog
 
-详见 [CHANGELOG.md](CHANGELOG.md)。
+See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ---
 
-**注意**: 本项目需要系统级权限才能正常运行，请确保在具有适当权限的环境中使用。
+**Note**: This project requires system-level permission to run properly. Please make sure to use it in an environment with appropriate permissions.

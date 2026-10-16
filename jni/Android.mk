@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 
-# 引入freetype静态库 #
+# Import freetype static library #
 include $(CLEAR_VARS)
 LOCAL_MODULE := lib_git_freetype
 LOCAL_SRC_FILES := src/ImGui/misc/git_freetype/$(TARGET_ARCH_ABI)/libfreetype.a
@@ -19,10 +19,10 @@ LOCAL_CPPFLAGS += -fexceptions
 
 LOCAL_CPPFLAGS += -DVK_USE_PLATFORM_ANDROID_KHR
 LOCAL_CPPFLAGS += -DIMGUI_IMPL_VULKAN_NO_PROTOTYPES
-LOCAL_CPPFLAGS += -DIMGUI_DISABLE_DEBUG_TOOLS #禁用imgui调试工具
-LOCAL_CPPFLAGS += -DIMGUI_ENABLE_FREETYPE     #启用imgui的freetype支持
+LOCAL_CPPFLAGS += -DIMGUI_DISABLE_DEBUG_TOOLS # Disable ImGui debug tools
+LOCAL_CPPFLAGS += -DIMGUI_ENABLE_FREETYPE     # Enable ImGui freetype support
 
-#引入头文件到全局#
+# Add header files globally #
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/Android_draw
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/Android_Graphics
@@ -60,7 +60,7 @@ LOCAL_SRC_FILES += src/My_Utils/stb_image.cpp
 
 
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv3
-LOCAL_LDLIBS += -lz #freetype需要
+LOCAL_LDLIBS += -lz # Required by freetype
 LOCAL_STATIC_LIBRARIES := lib_git_freetype
 
-include $(BUILD_EXECUTABLE) #可执行文件
+include $(BUILD_EXECUTABLE) # Build executable

@@ -18,7 +18,7 @@
 #define UNGRAB 0
 #define GRAB 1
 
-//TODO 触摸穿透
+//TODO touch passthrough
 
 namespace Touch {
     static struct {
@@ -323,7 +323,7 @@ namespace Touch {
         }
 
         if (devices.empty()) {
-            puts("获取屏幕驱动失败");
+            puts("Failed to get screen driver");
             return false;
         }
         //LOGD("device count: %zu", devices.size());

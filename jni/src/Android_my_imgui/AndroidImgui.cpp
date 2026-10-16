@@ -23,7 +23,7 @@ bool AndroidImgui::Init_Render(ANativeWindow *window, float width, float height)
     //io.FontGlobalScale = 1.3f;
     // Setup Dear ImGui style
     //ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight(); //白
+    //ImGui::StyleColorsLight(); // White
     ImGuiStyle &style = ImGui::GetStyle();
     //style.ScaleAllSizes(1.5);
     //style.WindowRounding = 3.f;

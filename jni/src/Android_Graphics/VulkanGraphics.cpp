@@ -59,7 +59,7 @@ bool VulkanGraphics::Create() {
 
     wd = std::make_unique<ImGui_ImplVulkanH_Window>();
 
-    //为imgui加载vulkan函数
+    // Load vulkan functions for imgui
     void *libvulkan = dlopen("libvulkan.so", RTLD_NOW);
     ImGui_ImplVulkan_LoadFunctions(0, [](const char *function_name, void *handle) -> PFN_vkVoidFunction {
         return reinterpret_cast<PFN_vkVoidFunction>(dlsym(handle, function_name));
@@ -278,7 +278,7 @@ void VulkanGraphics::PrepareFrame(bool resize) {
         }
         if (width > 0 && height > 0) {
             if (width != m_LastWidth || height != m_LastHeight) {
-                //切屏休息半秒
+                // Pause for half a second on screen switch
                 usleep(500000);
                 m_LastWidth = width;
                 m_LastHeight = height;
@@ -325,7 +325,7 @@ void VulkanGraphics::Render(ImDrawData *drawData) {
         check_vk_result(err);
     }
     {
-        //透明 默认已经是0了
+        // Transparent, default is already 0
         //memset(wd->ClearValue.color.float32, 0, sizeof(wd->ClearValue.color.float32));
         VkRenderPassBeginInfo info = {};
         info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;

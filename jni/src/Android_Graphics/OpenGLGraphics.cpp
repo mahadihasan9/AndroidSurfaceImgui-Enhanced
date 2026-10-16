@@ -5,7 +5,7 @@
 
 
 #if !defined(EGL_OPENGL_ES3_BIT)
-    // 如果 EGL_OPENGL_ES3_BIT 未定义，则编译这部分代码
+        // If EGL_OPENGL_ES3_BIT is not defined, compile this part
     #define EGL_OPENGL_ES3_BIT                0x00000040
 #endif
 

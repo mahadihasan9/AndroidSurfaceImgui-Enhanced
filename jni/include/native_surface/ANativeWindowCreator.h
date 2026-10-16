@@ -942,7 +942,7 @@ namespace android {
             std::string uniqueId;
             uint32_t currentLayerStack;
             int32_t orientation = 0;
-            std::string type;  // 新增 type 字段
+            std::string type;  // New type field
             struct
             {
                 int32_t left;
@@ -958,7 +958,7 @@ namespace android {
                 result.uniqueId = std::string{uniqueId.begin(), uniqueId.end()};
                 result.currentLayerStack = static_cast<uint32_t>(std::stoul(std::string{currentLayerStack.begin(), currentLayerStack.end()}));
                 result.orientation = orientation.empty() ? 0 : std::stoi(std::string{orientation.begin(), orientation.end()});
-                result.type = std::string{type.begin(), type.end()};  // 设置 type 字段
+                result.type = std::string{type.begin(), type.end()};  // Set type field
 
                 auto leftPos = currentLayerStackRect.find("(") + 1;
                 auto topPos = currentLayerStackRect.find(", ", leftPos);
@@ -997,7 +997,7 @@ namespace android {
             auto dumpDisplayInfoIt = std::string_view::npos;
             while (std::string_view::npos != (dumpDisplayInfoIt = dumpDisplayInfo.find("DisplayDeviceInfo", dumpDisplayInfoIt + 1)))
             {
-                // 获取 type 字段
+                // Get type field
                 auto type = SubStringView(dumpDisplayInfo, "type ", ",", dumpDisplayInfoIt);
                 auto uniqueId = SubStringView(dumpDisplayInfo, "uniqueId=\"", "\"", dumpDisplayInfoIt);
                 auto currentLayerStack = SubStringView(dumpDisplayInfo, "mCurrentLayerStack=", "\n", dumpDisplayInfoIt);
