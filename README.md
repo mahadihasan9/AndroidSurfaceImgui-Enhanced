@@ -145,11 +145,6 @@ This project is open-sourced under the MIT License - see the [LICENSE](LICENSE) 
 - Thanks to the [Dear ImGui](https://github.com/ocornut/imgui) team for the excellent GUI library
 - Thanks to all contributors and testers
 
-## Sponsor
-
-- Thanks to 花椒鸡 for sponsoring
-
-## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for details.
 
